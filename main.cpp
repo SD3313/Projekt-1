@@ -16,9 +16,10 @@ int screen_width = 640;
 int screen_height = 480;
 
 float vertices[] = {
-	-0.5f, -0.5f, 0.0f,
-	0.5f, -0.5f, 0.0f,
-	0.0f,  0.5f, 0.0f
+    // pozycja         // kolor
+    -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f, // czerwony
+     0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f, // zielony
+     0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 0.0f  // czarny
 };
 
 
@@ -61,8 +62,11 @@ int main(int argc, char **argv)
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(0); // pozycja
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+
+    glEnableVertexAttribArray(1); // kolor
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 
 
 
